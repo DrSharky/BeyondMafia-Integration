@@ -315,6 +315,14 @@ const roleData = {
                 "Can anonymously contact any role.",
             ],
         },
+        "Interrogator": {
+            alignment: "Mafia",
+            description: [
+                "Chooses someone to interrogate each day.",
+                "Meets with the prisoner at night and the prisoner cannot attend other meetings or perform actions.",
+                "Decides whether prisoner should be executed or not.",
+            ],
+        },
 
         //Monsters
         "Lycan": {

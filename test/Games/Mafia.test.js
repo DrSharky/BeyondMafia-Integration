@@ -1225,3 +1225,39 @@ describe("Games/Mafia", function () {
         });
     });
 });
+
+describe("Interrogator", function () {
+    it("should interrogate and kill the Village", async function () {
+        await db.promise;
+        await redis.client.flushdbAsync();
+
+        const setup = { total: 3, roles: [{ "Villager": 1, "Archer": 1, "Interrogator": 1 }] };
+        const game = await makeGame(setup);
+        const roles = getRoles(game);
+
+        addListenerToPlayers(game.players, "meeting", function (meeting) {
+            if (meeting.name == "Jail Target") {
+                this.sendToServer("vote", {
+                    selection: roles["Villager"].id,
+                    meetingId: meeting.id
+                });
+            }
+            else if (meeting.name == "Jail") {
+                this.sendToServer("vote", {
+                    selection: "Yes",
+                    meetingId: meeting.id
+                });
+            }
+            else {
+                this.sendToServer("vote", {
+                    selection: "*",
+                    meetingId: meeting.id
+                });
+            }
+        });
+
+        await waitForGameEnd(game);
+        should.not.exist(game.winners.groups["Village"]);
+        should.exist(game.winners.groups["Mafia"]);
+    });
+});

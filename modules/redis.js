@@ -182,6 +182,7 @@ async function getUserInfo(userId) {
     info.settings = JSON.parse(await client.getAsync(`user:${userId}:info:settings`));
     info.itemsOwned = JSON.parse(await client.getAsync(`user:${userId}:info:itemsOwned`));
     info.groups = JSON.parse(await client.getAsync(`user:${userId}:info:groups`));
+    info.love = await client.getAsync(`user:${userId}:info:love`);
 
     return info;
 }

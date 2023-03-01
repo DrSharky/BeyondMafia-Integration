@@ -147,6 +147,22 @@ export function NameWithAvatar(props) {
 	);
 }
 
+export function LoveType(props) {
+	const type = props.type;
+	return <div className="in-love">{getLoveTitle(type)}</div>
+}
+
+function getLoveTitle(loveType) {
+	if (loveType === "Lover") {
+		return "In Love With";
+	}
+	else if(loveType === "Married") {
+		return "Married To";
+	}
+	else
+	return "";
+}
+
 export function StatusIcon(props) {
 	return (
 		<div className={`status-icon ${props.status}`} />
@@ -170,6 +186,35 @@ export function Badges(props) {
 			{badges}
 		</div>
 	);
+}
+
+export function LoveIcon(props) {
+	const isLove = props.isLove;
+	const loveType = props.type;
+	const onLoveClick = props.onClick;
+	const isMarried = props.isMarried;
+
+	if ((!isLove && !isMarried) || (isLove && loveType !== "Married")) {
+		return (<i
+			className={`fas fa-heart  ${isLove ? "sel-love" : ""}`}
+			onClick={onLoveClick}
+			/>);
+	}
+	return null;
+}
+
+export function MarriedIcon(props) { 
+	const isMarried = props.isMarried;
+	const isLove = props.isLove;
+	const loveType = props.type;
+	const onMarryClick = props.onClick;
+	if ((isLove && loveType === "Lover") || isMarried) {
+		return (<i
+			className={`fas fa-ring ${isMarried ? "sel-married" : ""}`}
+			onClick={onMarryClick}
+		/>);
+	}
+	return null;
 }
 
 export function Badge(props) {

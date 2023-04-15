@@ -2,6 +2,8 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/node:1": {}      
+      "node": {
+        "version": "14.15.1",
+          "nodeGypDependencies": true
   }
 }

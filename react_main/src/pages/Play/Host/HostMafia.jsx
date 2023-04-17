@@ -116,7 +116,7 @@ export default function HostMafia() {
     ]);
 
     useEffect(() => {
-        document.title = "Host Mafia | BeyondMafia";
+        document.title = "Host Mafia | BeyonderMafia";
     }, []);
 
     function onHostGame() {

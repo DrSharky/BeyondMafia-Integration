@@ -19,7 +19,7 @@ export default function LogIn() {
 	const errorAlert = useErrorAlert();
 
 	useEffect(() => {
-		document.title = "Log In | BeyondMafia";
+		document.title = "Log In | BeyonderMafia";
 	}, []);
 
 	useEffect(() => {

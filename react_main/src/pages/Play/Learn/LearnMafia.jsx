@@ -174,7 +174,7 @@ export default function LearnMafia(props) {
 	];
 
 	useEffect(() => {
-		document.title = "Learn Mafia | BeyondMafia";
+		document.title = "Learn Mafia | BeyonderMafia";
 	}, []);
 
 	return (

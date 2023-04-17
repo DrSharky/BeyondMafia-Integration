@@ -22,7 +22,7 @@ export default function Moderation() {
     const errorAlert = useErrorAlert();
 
     useEffect(() => {
-        document.title = "Moderation | BeyondMafia";
+        document.title = "Moderation | BeyonderMafia";
 
         axios.get("/mod/groups")
             .then((res) => {

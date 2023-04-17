@@ -3,7 +3,7 @@ import { Emotes, emotify } from "../../components/Emotes";
 
 export default function EmoteList() {
 	useEffect(() => {
-		document.title = "Emotes | BeyondMafia";
+		document.title = "Emotes | BeyonderMafia";
 	}, []);
 
 	return (

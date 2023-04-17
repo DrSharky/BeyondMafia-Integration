@@ -141,7 +141,7 @@ function GameWrapper(props) {
         updateSettings({ type: "load" });
 
         if (!props.review) {
-            document.title = `Game ${gameId} | BeyondMafia`;
+            document.title = `Game ${gameId} | BeyonderMafia`;
             loadAudioFiles(audioFileNames, audioLoops, audioOverrides, audioVolumes);
             requestNotificationAccess();
 
@@ -175,7 +175,7 @@ function GameWrapper(props) {
             }
         }
         else {
-            document.title = `Review Game ${gameId} | BeyondMafia`;
+            document.title = `Review Game ${gameId} | BeyonderMafia`;
 
             axios.get(`/game/${gameId}/review/data`)
                 .then(res => {
@@ -2135,7 +2135,7 @@ function FirstGameModal(props) {
     const showModal = props.showModal;
     const setShowModal = props.setShowModal;
 
-    const modalHeader = "Welcome to BeyondMafia";
+    const modalHeader = "Welcome to BeyonderMafia";
 
     const modalContent = (
         <>

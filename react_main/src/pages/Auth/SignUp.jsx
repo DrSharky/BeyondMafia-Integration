@@ -19,6 +19,8 @@ export default function SignUp() {
     const errorAlert = useErrorAlert();
 
     const allowedEmailDomans = JSON.parse(process.env.REACT_APP_EMAIL_DOMAINS);
+    const allowedEmails = JSON.parse(process.env.REACT_APP_ALLOWED_EMAILS);
+    const emailsLocked = JSON.parse(process.env.REACT_APP_LOCKED_EMAILS);
 
     useEffect(() => {
         document.title = "Sign Up | BeyonderMafia";
@@ -35,12 +37,21 @@ export default function SignUp() {
             if (submitDisabled)
                 return;
 
-            var emailDomain = email.split("@")[1] || "";
-
-            if (allowedEmailDomans.indexOf(emailDomain) == -1) {
-                errorAlert("Email domain must be one of the following: " + allowedEmailDomans.join(", "));
-                return;
+            if (emailsLocked) {
+                if (allowedEmails.indexOf(email) == -1) {
+                    errorAlert(`Email is not in the approved list. Contact ${process.env.REACT_APP_EMAIL_ADMIN} for approval.`);
+                    return;
+                }
             }
+            else {
+                var emailDomain = email.split("@")[1] || "";
+                if (allowedEmailDomans.indexOf(emailDomain) == -1) {
+                    errorAlert("Email domain must be one of the following: " + allowedEmailDomans.join(", "));
+                    return;
+                }
+            }
+
+            
 
             setLoading(true);
             await verifyRecaptcha("auth");

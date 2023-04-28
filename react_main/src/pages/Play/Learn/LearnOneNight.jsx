@@ -10,7 +10,7 @@ export default function LearnOneNight(props) {
 	const gameType = "One Night";
 
 	useEffect(() => {
-		document.title = "Learn One Night | BeyondMafia";
+		document.title = "Learn One Night | BeyonderMafia";
 	}, []);
 
 	return (

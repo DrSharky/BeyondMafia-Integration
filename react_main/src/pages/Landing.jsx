@@ -18,7 +18,7 @@ export default function LandingPage(props) {
 				</div>
 			</div>
 			<div className="intro">
-				BeyondMafia is the mafia site that is revolutionary in design, safety, and has a thriving community of users from all walks of life. With competitive and casual live mafia, and other gamemodes like Resistance, you're sure to find something that suits how YOU want to play.
+				BeyonderMafia is the mafia site that is revolutionary in design, safety, and has a thriving community of users from all walks of life. With competitive and casual live mafia, and other gamemodes like Resistance, you're sure to find something that suits how YOU want to play.
 			</div>
 			<div className="mafia-features">
 				<div className="chat-mafia">

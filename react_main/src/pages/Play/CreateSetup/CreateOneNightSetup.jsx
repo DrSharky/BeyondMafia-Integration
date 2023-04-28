@@ -98,7 +98,7 @@ export default function CreateOneNightSetup() {
 	const siteInfo = useContext(SiteInfoContext);
 
 	useEffect(() => {
-		document.title = "Create One Night Setup | BeyondMafia";
+		document.title = "Create One Night Setup | BeyonderMafia";
 	}, []);
 
 	function onCreateSetup(roleData, editing, setRedirect) {

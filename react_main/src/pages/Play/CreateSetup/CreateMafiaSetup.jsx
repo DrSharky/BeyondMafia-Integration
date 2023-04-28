@@ -120,7 +120,7 @@ export default function CreateMafiaSetup() {
 	const siteInfo = useContext(SiteInfoContext);
 
 	useEffect(() => {
-		document.title = "Create Mafia Setup | BeyondMafia";
+		document.title = "Create Mafia Setup | BeyonderMafia";
 	}, []);
 
 	function onCreateSetup(roleData, editing, setRedirect) {

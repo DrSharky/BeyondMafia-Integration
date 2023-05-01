@@ -44,7 +44,7 @@ export default function Settings(props) {
 			label: "Disable All Censors",
 			ref: "disableAllCensors",
 			type: "boolean",
-			showIf: (deps) => deps.user.perms.disableAllCensors
+			//showIf: (deps) => deps.user.perms.disableAllCensors
 		},
 		{
 			label: "Hide Deleted Posts",

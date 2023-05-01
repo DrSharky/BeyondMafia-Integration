@@ -95,6 +95,11 @@ export default function Join(props) {
                             text="Sandbox"
                             sel={lobby}
                             onClick={() => lobbyNav("Sandbox")} />
+                        {user.settings.disableAllCensors &&
+                        <TopBarLink 
+                            text="Village"
+                            sel={lobby}
+                            onClick={() => lobbyNav("Village")} />}
                         <TopBarLink
                             text="Competitive"
                             sel={lobby}

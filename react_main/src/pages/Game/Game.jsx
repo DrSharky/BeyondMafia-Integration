@@ -973,6 +973,7 @@ export function TextMeetingLayout(props) {
                 key={message.id || message.messageId + message.time || i}
                 onMessageQuote={onMessageQuote}
                 settings={props.settings}
+                options={props.options}
                 unfocusedMessage={unfocusedMessage}
             />
         );
@@ -1239,6 +1240,7 @@ function Message(props) {
                                 ({message.prefix})
                             </div>
                         }
+                        { props.options.lobby !== "Village" &&
                         <UserText
                             text={message.content}
                             settings={user.settings}
@@ -1246,7 +1248,15 @@ function Message(props) {
                             filterProfanity
                             linkify
                             emotify
-                            iconUsername />
+                            iconUsername /> }
+                        { props.options.lobby === "Village" &&
+                        <UserText
+                        text={message.content}
+                        settings={user.settings}
+                        players={players}
+                        linkify
+                        emotify
+                        iconUsername /> }
                     </>
                 }
                 {message.isQuote &&
@@ -1381,6 +1391,66 @@ function SpeechInput(props) {
         }
     }
 
+    function onSpeechSubmitUncensor(e) {
+        if (e.key === "Enter" && selTab && speechInput.length) {
+            const abilityInfo = speechDropdownValue.split(":");
+            var abilityName = abilityInfo[0];
+            var abilityTarget = abilityInfo[1];
+
+            if (abilityName == "Say")
+                abilityName = null;
+
+            // if (textIncludesSlurs(speechInput)) {
+            //     socket.send("slurDetected");
+            // } else {
+                socket.send("speak", {
+                    content: speechInput,
+                    meetingId: selTab,
+                    abilityName,
+                    abilityTarget
+                });
+                props.setAutoScroll(true);
+        //    }
+
+            setSpeechInput("");
+
+        } else if (e.key === "Tab") {
+            e.preventDefault();
+            const words = speechInput.split(" ");
+            const word = words.pop();
+            // Removing non-word characters before the string.
+            const seedString = word.match(/[^\w-]?([\w-]*)$/)[1].toLowerCase();
+            const prefix = word.substring(0, word.length - seedString.length);
+            if (!seedString.length)
+                return;
+
+            const playerNames = Object.values(players).map(player => player.name);
+            const playerSeeds = playerNames.map(playerName => playerName.toLowerCase().substring(0, seedString.length));
+            const matchedPlayers = [];
+            for (const i in playerSeeds) { // Checking seed string against characters in player names.
+                if (playerSeeds[i] === seedString) {
+                    matchedPlayers.push(playerNames[i]);
+                }
+            }
+            if (matchedPlayers.length) {
+                if (matchedPlayers.length === 1) { // If one matching player, autocomplete entire name.
+                    words.push(prefix + matchedPlayers[0]);
+                } else { // If multiple matching players, autocomplete until player names diverge.
+                    let autocompleted = "";
+                    let i = 1;
+                    while (matchedPlayers.every(playerName => playerName[i] === matchedPlayers[0][i])) {
+                        i += 1;
+                    }
+                    words.push(prefix + matchedPlayers[0].substring(0, i));
+                }
+                setSpeechInput(words.join(" "));
+            } else if (word.toLowerCase() === "@everyone".substring(0, word.length)) { // Check for @everyone.
+                words.push("@everyone");
+                setSpeechInput(words.join(" "));
+            }
+        }
+    }
+
     function onSpeechSubmit(e) {
         if (e.key === "Enter" && selTab && speechInput.length) {
             const abilityInfo = speechDropdownValue.split(":");
@@ -1470,6 +1540,7 @@ function SpeechInput(props) {
                     options={speechDropdownOptions}
                     onChange={onSpeechDropdownChange}
                     value={speechDropdownValue} />
+                { options.lobby === "Village" &&
                 <input
                     id="speechInput"
                     className="speech-input"
@@ -1480,7 +1551,20 @@ function SpeechInput(props) {
                     maxLength={MaxGameMessageLength}
                     onChange={onSpeechType}
                     enterKeyHint="done"
-                    onKeyDown={onSpeechSubmit} />
+                    options={props.options}
+                    onKeyDown={onSpeechSubmitUncensor} /> }
+                {options.lobby !== "Village" && <input
+                    id="speechInput"
+                    className="speech-input"
+                    type="text"
+                    autoComplete="off"
+                    value={speechInput}
+                    placeholder={placeholder}
+                    maxLength={MaxGameMessageLength}
+                    onChange={onSpeechType}
+                    enterKeyHint="done"
+                    options={props.options}
+                    onKeyDown={onSpeechSubmit} /> }
             </div>
             {options.voiceChat &&
                 <>

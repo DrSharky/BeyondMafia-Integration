@@ -595,6 +595,9 @@ const lobbyChecks = {
         if (setup.comp)
             return "Competitive games are not allowed in Sandbox lobby.";
     },
+    "Village": (gameType, setup, settings) => {
+
+    },
     "Competitive": (gameType, setup, settings) => {
         if (gameType != "Mafia")
             return "Only Mafia is allowed in Competitive lobby.";

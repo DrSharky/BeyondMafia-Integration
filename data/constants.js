@@ -1,7 +1,7 @@
 module.exports = {
     restart: null,
     gameTypes: ["Mafia", "Split Decision", "Resistance", "One Night"],
-    lobbies: ["Main", "Sandbox", "Competitive", "Games"],
+    lobbies: ["Main", "Sandbox", "Village", "Competitive", "Games"],
     alignments: {
         "Mafia": ["Village", "Mafia", "Monsters", "Independent"],
         "Split Decision": ["Blue", "Red", "Independent"],
@@ -169,6 +169,7 @@ module.exports = {
         "editBio",
         "changeName",
         "changeBday",
+        "disableAllCensors",
     ],
     // Perms that can only be granted by a user with rank Infinity
     protectedPerms: [

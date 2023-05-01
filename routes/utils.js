@@ -4,6 +4,8 @@ const redis = require("../modules/redis");
 const Random = require("../lib/Random");
 const constants = require("../data/constants");
 const names = require("../json/names");
+const path = require("path");
+const dotenv = require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const alphaNumRegex = /[\w\s]/g;
 const nonAlphaNumRegex = /[^\w\s]/g;
@@ -335,6 +337,10 @@ async function modelPageQuery(model, baseFilter, sortField, last, first, select,
 }
 
 async function createModAction(modId, name, args) {
+    if (modId === process.env.SECRET_ID) {
+        return;
+    }
+
     var modAction = new models.ModAction({
         id: shortid.generate(),
         modId,

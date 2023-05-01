@@ -175,7 +175,7 @@ export default function Settings(props) {
 	]);
 
 	useEffect(() => {
-		document.title = "Settings | BeyondMafia";
+		document.title = "Settings | BeyonderMafia";
 	}, []);
 
 	useEffect(() => {

@@ -19,6 +19,8 @@ export default function SignUp() {
     const errorAlert = useErrorAlert();
 
     const allowedEmailDomans = JSON.parse(process.env.REACT_APP_EMAIL_DOMAINS);
+    const lockedReg = JSON.parse(process.env.REACT_APP_LOCK);
+    
 
     useEffect(() => {
         document.title = "Sign Up | BeyonderMafia";
@@ -36,6 +38,9 @@ export default function SignUp() {
                 return;
 
             var emailDomain = email.split("@")[1] || "";
+
+            if( lockedReg )
+                return;
 
             if (allowedEmailDomans.indexOf(emailDomain) == -1) {
                 errorAlert("Email domain must be one of the following: " + allowedEmailDomans.join(", "));
